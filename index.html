@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <input class="username" type="text" placeholder="name" name="" id="">
+    <input class="password" type="text" placeholder="password" name="" id="">
+    <input class="age" type="text" placeholder="age" name="" id="">
+    <input class="email" type="text" placeholder="email" name="" id="">
+    <button id="creat-user">creat user</button>
+    <hr>
+    <input class="username-l" type="text" placeholder="name" name="" id="">
+    <input class="password-l" type="text" placeholder="password" name="" id="">
+    
+    <button id="get-user-token">get user token</button>
+    <hr>
+    <button id="read-user">get user list</button>
+<hr>
+<input class="username-u" type="text" placeholder="name" name="" id="">
+<input class="age-u" type="text" placeholder="age" name="" id="">
+<input class="email-u" type="text" placeholder="email" name="" id="">
+<input class="id-u" type="text" placeholder="id" name="" id="">
+
+<button id="update-user">update user</button>
+<hr>
+<input class="id-d" type="text" placeholder="id-d" name="" id="">
+<button id="delet-user">delet user</button>
+
+</body>
+<script>
+  document.querySelector('#creat-user').addEventListener("click",()=>{
+    fetch("http://localhost:5000/register",{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify({
+            username:document.querySelector(".username").value,
+            age:document.querySelector(".age").value,
+            email:document.querySelector(".email").value,
+            password:document.querySelector(".password").value,
+
+        })
+    })
+  })
+
+  document.querySelector('#get-user-token').addEventListener("click",()=>{
+    fetch("http://localhost:5000/login",{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify({
+            username:document.querySelector(".username-l").value,
+         
+            password:document.querySelector(".password-l").value,
+
+        })
+    })
+  })
+
+  document.querySelector('#update-user').addEventListener("click",()=>{
+    fetch("http://localhost:5000/",{
+        method:'PUT',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify({
+            username:document.querySelector(".username-u").value,
+            age:document.querySelector(".age-u").value,
+            email:document.querySelector(".email-u").value,
+            id:document.querySelector(".id-u").value,
+
+        })
+    })
+  })
+  document.querySelector('#read-user').addEventListener("click",()=>{
+    fetch("http://localhost:5000/").then((res)=>{
+        console.log(res)})
+  })
+  document.querySelector('#delet-user').addEventListener("click",()=>{
+    fetch(`http://localhost:5000/${document.querySelector(".id-d").value}`,{
+        method:"DELETE"
+    }).then((res)=>{
+        console.log(res)})
+  })
+</script>
+</html>
